@@ -3,30 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putunbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dacastil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 12:52:24 by dacastil          #+#    #+#             */
-/*   Updated: 2024/11/19 20:40:37 by dacastil         ###   ########.fr       */
+/*   Created: 2024/11/22 20:37:14 by dacastil          #+#    #+#             */
+/*   Updated: 2024/11/22 20:37:33 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putunbr(int num)
+int	ft_putunbr(unsigned long num)
 {
-	long	n;
 	int		ln;
 
 	ln = 0;
-	n = num;
-	if (num < 0)
+	if (num >= 10)
 	{
-		return ("null");
+		ln += ft_putunbr(num / 10);
 	}
-	if (n >= 10)
-	{
-		ln = ln + ft_putnbr(n / 10);
-	}
-	ft_putchar((n % 10) + '0');
+	ln += ft_putchar((num % 10) + '0');
 	return (ln);
 }

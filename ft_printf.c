@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dacastil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 20:17:41 by dacastil          #+#    #+#             */
-/*   Updated: 2024/11/19 21:31:04 by dacastil         ###   ########.fr       */
+/*   Created: 2024/11/22 20:30:19 by dacastil          #+#    #+#             */
+/*   Updated: 2024/11/22 20:31:30 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_cases(va_list args, char c)
+int	ft_cases(va_list args, char c)
 {
 	if (c == 'c')
-		ft_putchar(va_arg(args, int));
+		return (ft_putchar(va_arg(args, int)));
 	else if (c == 's')
-		ft_putstr(va_arg(args, char *));
+		return (ft_putstr(va_arg(args, char *)));
 	else if (c == 'p')
-		ft_putpointer(va_arg(args, void *));
+		return (ft_putpointer(va_arg(args, void *)));
 	else if (c == 'd' || c == 'i')
-		ft_putnbr(va_arg(args, int));
+		return (ft_putnbr(va_arg(args, int)));
 	else if (c == 'u')
-		ft_putunbr(va_arg(args, unsigned int));
+		return (ft_putunbr(va_arg(args, unsigned int)));
 	else if (c == 'x' || c == 'X')
-		ft_puthex(va_arg(args, unsigned int), c);
+		return (ft_puthex(va_arg(args, unsigned int), c));
 	else if (c == '%')
-		write(1, '%', 1);
+		return (ft_putchar('%'));
+	return (0);
 }
 
 int	ft_printf(const char *str, ...)
@@ -41,9 +42,9 @@ int	ft_printf(const char *str, ...)
 	va_start(args, str);
 	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i + 1])
 		{
-			ft_cases(args, str[i + 1]);
+			ln += ft_cases(args, str[i + 1]);
 			i++;
 		}
 		else

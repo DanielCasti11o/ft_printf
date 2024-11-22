@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dacastil <dacastil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dacastil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 18:45:14 by dacastil          #+#    #+#             */
-/*   Updated: 2024/11/19 20:25:13 by dacastil         ###   ########.fr       */
+/*   Created: 2024/11/22 20:35:55 by dacastil          #+#    #+#             */
+/*   Updated: 2024/11/22 20:54:24 by dacastil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_putnbr(int num)
 {
@@ -21,14 +21,13 @@ int	ft_putnbr(int num)
 	n = num;
 	if (num < 0)
 	{
-		ft_putchar('-');
+		ln += ft_putchar('-');
 		n = -n;
-		ln++;
 	}
 	if (n >= 10)
 	{
-		ln = ln + ft_putnbr(n / 10);
+		ln += ft_putnbr(n / 10);
 	}
-	ft_putchar((n % 10) + '0');
+	ln += ft_putchar((n % 10) + '0');
 	return (ln);
 }
